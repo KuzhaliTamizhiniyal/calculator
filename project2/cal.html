@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <!-- Bootstrap CSS (you can include this from a CDN if needed) -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f8f9fa;
+    }
+
+    #calculator {
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #result {
+      height: 60px;
+      background-color: #f8f9fa;
+      font-size: 24px;
+      text-align: right;
+      padding: 10px;
+    }
+
+    #buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    button {
+      font-size: 20px;
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #dee2e6;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #e9ecef;
+    }
+  </style>
+</head>
+<body>
+    <script src="https://app.zenclass.in/sheets/v1/js/zen/suite/bundle.js"></script>
+    <h1 id="title">CAlCULATOR</h1>
+    <P id="description">A PLACE TO CALCULATE</P>
+<div class="container">
+  <div id="calculator" class="mt-5">
+    <div id="result"></div>
+    <div id="buttons">
+      <button id="1" onclick="handleButtonClick('1')">1</button>
+      <button id="2" onclick="handleButtonClick('2')">2</button>
+      <button id="3" onclick="handleButtonClick('3')">3</button>
+      <button id="add" onclick="handleButtonClick('+')">+</button>
+      <button id="4" onclick="handleButtonClick('4')">4</button>
+      <button id="5" onclick="handleButtonClick('5')">5</button>
+      <button id="6" onclick="handleButtonClick('6')">6</button>
+      <button id="subtract" onclick="handleButtonClick('-')">-</button>
+      <button id="7" onclick="handleButtonClick('7')">7</button>
+      <button id="8" onclick="handleButtonClick('8')">8</button>
+      <button id="9" onclick="handleButtonClick('9')">9</button>
+      <button id="*" onclick="handleButtonClick('*')">*</button>
+      <button id="0" onclick="handleButtonClick('0')">0</button>
+      <button id="." onclick="handleButtonClick('.')">.</button>
+      <button id="equal" onclick="calculateResult()">=</button>
+      <button id="/" onclick="handleButtonClick('/')">/</button>
+      <button id="clear" onclick="clearResult()">C</button>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS (you can include this from a CDN if needed) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+  let resultElement = document.getElementById('result');
+  let expression = '';
+
+  function handleButtonClick(value) {
+    if (isNumber(value) || isOperator(value) || value === '.') {
+      expression += value;
+      updateResult();
+    } else {
+      alert('Only numbers are allowed');
+    }
+  }
+
+  function calculateResult() {
+    try {
+      let result = eval(expression);
+      expression = result.toString();
+      updateResult();
+    } catch (error) {
+      alert('Invalid expression');
+    }
+  }
+
+  function clearResult() {
+    expression = '';
+    updateResult();
+  }
+
+  function updateResult() {
+    resultElement.textContent = expression;
+  }
+
+  function isNumber(value) {
+    return /^\d+$/.test(value);
+  }
+
+  function isOperator(value) {
+    return value === '+' || value === '-' || value === '*' || value === '/';
+  }
+</script>
+
+</body>
+</html>
